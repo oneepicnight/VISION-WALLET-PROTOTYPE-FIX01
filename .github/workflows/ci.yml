@@ -1,0 +1,62 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  rust-ci:
+    name: Rust (Ubuntu)
+    runs-on: ubuntu-latest
+    env:
+      STRIPE_TEST_NO_VERIFY: "1"
+      ADMIN_TOKEN: "devtoken123"
+      CARGO_TERM_COLOR: always
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Cache cargo
+        uses: Swatinem/rust-cache@v2
+
+      - name: Build
+        run: cargo build --all-targets
+
+      - name: Clippy
+        run: cargo clippy --all-targets --all-features -- -D warnings
+
+      - name: Tests
+        run: cargo test --all --all-features --quiet
+
+  rust-ci-windows:
+    name: Rust (Windows)
+    runs-on: windows-latest
+    env:
+      STRIPE_TEST_NO_VERIFY: "1"
+      ADMIN_TOKEN: "devtoken123"
+      RUST_TEST_THREADS: "1"
+      CARGO_TERM_COLOR: always
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Cache cargo
+        uses: Swatinem/rust-cache@v2
+
+      - name: Build
+        shell: pwsh
+        run: cargo build --all-targets
+
+      - name: Clippy
+        shell: pwsh
+        run: cargo clippy --all-targets --all-features -- -D warnings
+
+      - name: Tests (single-threaded)
+        shell: pwsh
+        run: cargo test --all --all-features --quiet -- --test-threads=1
