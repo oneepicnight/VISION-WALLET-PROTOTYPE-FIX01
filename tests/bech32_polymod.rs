@@ -1,5 +1,3 @@
-use bech32;
-
 // Diagnostic helpers: hrp_expand and polymod per BIP-173
 fn hrp_expand(hrp: &str) -> Vec<u8> {
     let mut v = Vec::with_capacity(hrp.len() * 2 + 1);

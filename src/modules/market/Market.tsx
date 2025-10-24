@@ -1,6 +1,7 @@
 import React from 'react'
 import { Listing, listListings, createCheckout, simulateWebhook, getListing } from './marketApi'
 import { env } from '../../utils/env'
+import QRCode from 'qrcode'
 
 function short(s: string) { return s.slice(0,6) + '...' + s.slice(-4) }
 
@@ -59,6 +60,29 @@ export default function Market() {
     } catch (e) { console.error('checkout failed', e); alert('Failed to create checkout') }
   }
 
+  async function toDataURL(text: string): Promise<string> {
+    try { return await QRCode.toDataURL(text, { margin: 1, width: 192 }); }
+    catch { return "" }
+  }
+
+  const handleShowQR = async (listing: Listing) => {
+    try {
+      const data = await toDataURL(listing.pay_to)
+      // open small window with image
+      const w = window.open('', '_blank', 'noopener,noreferrer')
+      if (w) {
+        w.document.write(`<img src="${data}" alt="QR" style="width:256px;height:256px;border:1px solid #ddd;border-radius:8px" />`)
+      }
+    } catch (e) { console.error('qr failed', e) }
+  }
+
+  const handleCopy = async (listing: Listing) => {
+    try {
+      await navigator.clipboard.writeText(listing.pay_to)
+      window.alert('Copied!')
+    } catch (e) { console.error('copy failed', e); window.alert('Copy failed') }
+  }
+
   const handleSimulate = async (listing: Listing) => {
     try {
       const info = sessionMap[listing.id]
@@ -83,6 +107,8 @@ export default function Market() {
             <div className="mt-1">Price: <strong>{(l.price_amount/100).toFixed(2)} {l.price_chain}</strong></div>
             <div className="mt-3 flex gap-2">
               <button className="px-3 py-1 bg-blue-600 text-white rounded" onClick={() => handleBuy(l)}>Buy</button>
+              <button className="px-3 py-1 bg-gray-200 text-gray-800 rounded" onClick={() => handleShowQR(l)}>Show QR</button>
+              <button className="px-3 py-1 bg-gray-200 text-gray-800 rounded" onClick={() => handleCopy(l)}>Copy address</button>
               {dev && <button className="px-3 py-1 bg-green-600 text-white rounded" onClick={() => handleSimulate(l)}>Mark Paid (DEV)</button>}
               <div className="ml-auto text-sm">Status: <strong>{l.status}</strong></div>
             </div>

@@ -22,7 +22,11 @@ fn simple_server_smoke() {
     sleep(Duration::from_millis(500));
 
     let resp = reqwest::blocking::get("http://127.0.0.1:8080/").expect("request failed");
-    assert_eq!(resp.status().as_u16(), 200, "expected 200 from simple server");
+    assert_eq!(
+        resp.status().as_u16(),
+        200,
+        "expected 200 from simple server"
+    );
 
     // Kill the child process
     let _ = child.kill();

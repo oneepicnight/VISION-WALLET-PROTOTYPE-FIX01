@@ -1,0 +1,261 @@
+OUT_DIR = Some(C:\Users\bighe\Downloads\VISION-WALLET-PROTOTYPE-FIX01\bech32_probe\target\debug\build\secp256k1-sys-ae1d4a70e7b45338\out)
+OPT_LEVEL = Some(0)
+TARGET = Some(x86_64-pc-windows-msvc)
+CARGO_ENCODED_RUSTFLAGS = Some()
+cargo:rerun-if-env-changed=VCINSTALLDIR
+VCINSTALLDIR = None
+cargo:rerun-if-env-changed=VSTEL_MSBuildProjectFullPath
+VSTEL_MSBuildProjectFullPath = None
+cargo:rerun-if-env-changed=VCToolsVersion
+VCToolsVersion = None
+cargo:rerun-if-env-changed=VSCMD_ARG_VCVARS_SPECTRE
+VSCMD_ARG_VCVARS_SPECTRE = None
+cargo:rerun-if-env-changed=WindowsSdkDir
+WindowsSdkDir = None
+cargo:rerun-if-env-changed=WindowsSDKVersion
+WindowsSDKVersion = None
+cargo:rerun-if-env-changed=LIB
+LIB = None
+PATH = Some(C:\Users\bighe\Downloads\VISION-WALLET-PROTOTYPE-FIX01\bech32_probe\target\debug\deps;C:\Users\bighe\Downloads\VISION-WALLET-PROTOTYPE-FIX01\bech32_probe\target\debug;C:\Program Files\Rust stable MSVC 1.90\lib\rustlib\x86_64-pc-windows-msvc\lib;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\Rust stable MSVC 1.90\bin;C:\Program Files\nodejs\;C:\Program Files\Git\cmd;C:\ProgramData\chocolatey\bin;C:\Program Files\CMake\bin;C:\Users\bighe\.cargo\bin;C:\Users\bighe\AppData\Local\Microsoft\WindowsApps;C:\Users\bighe\AppData\Roaming\npm;C:\Users\bighe\AppData\Local\Programs\Microsoft VS Code\bin;C:\Program Files\NASM;C:\Users\bighe\.cargo\bin;C:\Users\bighe\AppData\Local\Microsoft\WindowsApps;C:\Users\bighe\AppData\Roaming\npm;C:\Users\bighe\AppData\Local\Programs\Microsoft VS Code\bin;c:\Users\bighe\AppData\Roaming\Code\User\globalStorage\github.copilot-chat\debugCommand)
+cargo:rerun-if-env-changed=INCLUDE
+INCLUDE = None
+HOST = Some(x86_64-pc-windows-msvc)
+cargo:rerun-if-env-changed=CC_x86_64-pc-windows-msvc
+CC_x86_64-pc-windows-msvc = None
+cargo:rerun-if-env-changed=CC_x86_64_pc_windows_msvc
+CC_x86_64_pc_windows_msvc = None
+cargo:rerun-if-env-changed=HOST_CC
+HOST_CC = None
+cargo:rerun-if-env-changed=CC
+CC = None
+cargo:rerun-if-env-changed=CRATE_CC_NO_DEFAULTS
+CRATE_CC_NO_DEFAULTS = None
+CARGO_CFG_TARGET_FEATURE = Some(cmpxchg16b,fxsr,sse,sse2,sse3)
+DEBUG = Some(true)
+cargo:rerun-if-env-changed=CFLAGS
+CFLAGS = None
+cargo:rerun-if-env-changed=HOST_CFLAGS
+HOST_CFLAGS = None
+cargo:rerun-if-env-changed=CFLAGS_x86_64_pc_windows_msvc
+CFLAGS_x86_64_pc_windows_msvc = None
+cargo:rerun-if-env-changed=CFLAGS_x86_64-pc-windows-msvc
+CFLAGS_x86_64-pc-windows-msvc = None
+OUT_DIR = Some(C:\Users\bighe\Downloads\VISION-WALLET-PROTOTYPE-FIX01\bech32_probe\target\debug\build\secp256k1-sys-ae1d4a70e7b45338\out)
+cargo:rerun-if-env-changed=CC_ENABLE_DEBUG_OUTPUT
+cargo:rerun-if-env-changed=CRATE_CC_NO_DEFAULTS
+CRATE_CC_NO_DEFAULTS = None
+TARGET = Some(x86_64-pc-windows-msvc)
+CARGO_CFG_TARGET_FEATURE = Some(cmpxchg16b,fxsr,sse,sse2,sse3)
+HOST = Some(x86_64-pc-windows-msvc)
+cargo:rerun-if-env-changed=CFLAGS
+CFLAGS = None
+cargo:rerun-if-env-changed=HOST_CFLAGS
+HOST_CFLAGS = None
+cargo:rerun-if-env-changed=CFLAGS_x86_64_pc_windows_msvc
+CFLAGS_x86_64_pc_windows_msvc = None
+cargo:rerun-if-env-changed=CFLAGS_x86_64-pc-windows-msvc
+CFLAGS_x86_64-pc-windows-msvc = None
+cargo:rerun-if-env-changed=CC_ENABLE_DEBUG_OUTPUT
+lax_der_parsing.c
+precomputed_ecmult_gen.c
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\util.h(273): warning C4146: unary minus operator applied to unsigned type, result still unsigned
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\util.h(286): warning C4146: unary minus operator applied to unsigned type, result still unsigned
+precomputed_ecmult.c
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\util.h(273): warning C4146: unary minus operator applied to unsigned type, result still unsigned
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\util.h(286): warning C4146: unary minus operator applied to unsigned type, result still unsigned
+secp256k1.c
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\util.h(273): warning C4146: unary minus operator applied to unsigned type, result still unsigned
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\util.h(286): warning C4146: unary minus operator applied to unsigned type, result still unsigned
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\assumptions.h(40): warning C4310: cast truncates constant value
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\assumptions.h(41): warning C4310: cast truncates constant value
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\assumptions.h(42): warning C4310: cast truncates constant value
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\assumptions.h(46): warning C4310: cast truncates constant value
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\assumptions.h(47): warning C4310: cast truncates constant value
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\assumptions.h(48): warning C4310: cast truncates constant value
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\assumptions.h(52): warning C4310: cast truncates constant value
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\assumptions.h(53): warning C4310: cast truncates constant value
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\assumptions.h(54): warning C4310: cast truncates constant value
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\assumptions.h(70): warning C4310: cast truncates constant value
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\assumptions.h(71): warning C4310: cast truncates constant value
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\modinv32_impl.h(198): warning C4146: unary minus operator applied to unsigned type, result still unsigned
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\modinv32_impl.h(288): warning C4146: unary minus operator applied to unsigned type, result still unsigned
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\modinv32_impl.h(289): warning C4146: unary minus operator applied to unsigned type, result still unsigned
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\modinv32_impl.h(290): warning C4146: unary minus operator applied to unsigned type, result still unsigned
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\modinv32_impl.h(300): warning C4244: '=': conversion from 'uint32_t' to 'uint16_t', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\field_10x26_impl.h(803): warning C4244: '=': conversion from 'uint64_t' to 'uint32_t', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\field_10x26_impl.h(1077): warning C4244: '=': conversion from 'uint64_t' to 'uint32_t', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\field_10x26_impl.h(1237): warning C4244: '=': conversion from 'const uint64_t' to 'int32_t', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(135): warning C4244: '=': conversion from 'uint64_t' to 'int', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(184): warning C4244: '=': conversion from 'const uint32_t' to 'unsigned char', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(184): warning C4244: '=': conversion from 'const uint32_t' to 'unsigned char', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(184): warning C4244: '=': conversion from 'const uint32_t' to 'unsigned char', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(185): warning C4244: '=': conversion from 'const uint32_t' to 'unsigned char', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(185): warning C4244: '=': conversion from 'const uint32_t' to 'unsigned char', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(185): warning C4244: '=': conversion from 'const uint32_t' to 'unsigned char', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(186): warning C4244: '=': conversion from 'const uint32_t' to 'unsigned char', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(186): warning C4244: '=': conversion from 'const uint32_t' to 'unsigned char', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(186): warning C4244: '=': conversion from 'const uint32_t' to 'unsigned char', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(187): warning C4244: '=': conversion from 'const uint32_t' to 'unsigned char', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(187): warning C4244: '=': conversion from 'const uint32_t' to 'unsigned char', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(187): warning C4244: '=': conversion from 'const uint32_t' to 'unsigned char', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(188): warning C4244: '=': conversion from 'const uint32_t' to 'unsigned char', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(188): warning C4244: '=': conversion from 'const uint32_t' to 'unsigned char', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(188): warning C4244: '=': conversion from 'const uint32_t' to 'unsigned char', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(189): warning C4244: '=': conversion from 'const uint32_t' to 'unsigned char', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(189): warning C4244: '=': conversion from 'const uint32_t' to 'unsigned char', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(189): warning C4244: '=': conversion from 'const uint32_t' to 'unsigned char', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(190): warning C4244: '=': conversion from 'const uint32_t' to 'unsigned char', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(190): warning C4244: '=': conversion from 'const uint32_t' to 'unsigned char', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(190): warning C4244: '=': conversion from 'const uint32_t' to 'unsigned char', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(191): warning C4244: '=': conversion from 'const uint32_t' to 'unsigned char', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(191): warning C4244: '=': conversion from 'const uint32_t' to 'unsigned char', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(191): warning C4244: '=': conversion from 'const uint32_t' to 'unsigned char', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(341): warning C4244: '=': conversion from 'uint64_t' to 'uint32_t', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(344): warning C4244: '=': conversion from 'uint64_t' to 'uint32_t', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(345): warning C4244: '=': conversion from 'uint64_t' to 'uint32_t', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(348): warning C4244: '=': conversion from 'uint64_t' to 'uint32_t', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(349): warning C4244: '=': conversion from 'uint64_t' to 'uint32_t', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(350): warning C4244: '=': conversion from 'uint64_t' to 'uint32_t', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(353): warning C4244: '=': conversion from 'uint64_t' to 'uint32_t', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(354): warning C4244: '=': conversion from 'uint64_t' to 'uint32_t', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(355): warning C4244: '=': conversion from 'uint64_t' to 'uint32_t', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(356): warning C4244: '=': conversion from 'uint64_t' to 'uint32_t', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(359): warning C4244: '=': conversion from 'uint64_t' to 'uint32_t', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(360): warning C4244: '=': conversion from 'uint64_t' to 'uint32_t', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(361): warning C4244: '=': conversion from 'uint64_t' to 'uint32_t', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(362): warning C4244: '=': conversion from 'uint64_t' to 'uint32_t', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(366): warning C4244: '=': conversion from 'uint64_t' to 'uint32_t', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(367): warning C4244: '=': conversion from 'uint64_t' to 'uint32_t', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(368): warning C4244: '=': conversion from 'uint64_t' to 'uint32_t', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(369): warning C4244: '=': conversion from 'uint64_t' to 'uint32_t', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(373): warning C4244: '=': conversion from 'uint64_t' to 'uint32_t', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(374): warning C4244: '=': conversion from 'uint64_t' to 'uint32_t', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(375): warning C4244: '=': conversion from 'uint64_t' to 'uint32_t', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(376): warning C4244: '=': conversion from 'uint64_t' to 'uint32_t', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(380): warning C4244: '=': conversion from 'uint64_t' to 'uint32_t', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(381): warning C4244: '=': conversion from 'uint64_t' to 'uint32_t', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(382): warning C4244: '=': conversion from 'uint64_t' to 'uint32_t', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(383): warning C4244: '=': conversion from 'uint64_t' to 'uint32_t', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(386): warning C4244: '=': conversion from 'uint64_t' to 'uint32_t', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(387): warning C4244: '=': conversion from 'uint64_t' to 'uint32_t', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(388): warning C4244: '=': conversion from 'uint64_t' to 'uint32_t', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(391): warning C4244: '=': conversion from 'uint64_t' to 'uint32_t', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(392): warning C4244: '=': conversion from 'uint64_t' to 'uint32_t', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(395): warning C4244: '=': conversion from 'uint64_t' to 'uint32_t', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(406): warning C4244: '=': conversion from 'uint64_t' to 'uint32_t', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(409): warning C4244: '=': conversion from 'uint64_t' to 'uint32_t', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(410): warning C4244: '=': conversion from 'uint64_t' to 'uint32_t', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(413): warning C4244: '=': conversion from 'uint64_t' to 'uint32_t', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(414): warning C4244: '=': conversion from 'uint64_t' to 'uint32_t', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(415): warning C4244: '=': conversion from 'uint64_t' to 'uint32_t', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(418): warning C4244: '=': conversion from 'uint64_t' to 'uint32_t', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(419): warning C4244: '=': conversion from 'uint64_t' to 'uint32_t', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(420): warning C4244: '=': conversion from 'uint64_t' to 'uint32_t', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(421): warning C4244: '=': conversion from 'uint64_t' to 'uint32_t', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(424): warning C4244: '=': conversion from 'uint64_t' to 'uint32_t', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(425): warning C4244: '=': conversion from 'uint64_t' to 'uint32_t', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(426): warning C4244: '=': conversion from 'uint64_t' to 'uint32_t', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(427): warning C4244: '=': conversion from 'uint64_t' to 'uint32_t', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(431): warning C4244: '=': conversion from 'uint64_t' to 'uint32_t', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(432): warning C4244: '=': conversion from 'uint64_t' to 'uint32_t', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(433): warning C4244: '=': conversion from 'uint64_t' to 'uint32_t', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(437): warning C4244: '=': conversion from 'uint64_t' to 'uint32_t', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(438): warning C4244: '=': conversion from 'uint64_t' to 'uint32_t', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(442): warning C4244: '=': conversion from 'uint64_t' to 'uint32_t', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(468): warning C4244: 'function': conversion from 'uint64_t' to 'uint32_t', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(476): warning C4244: '=': conversion from 'uint64_t' to 'uint32_t', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(478): warning C4244: '=': conversion from 'uint64_t' to 'uint32_t', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(479): warning C4244: '=': conversion from 'uint64_t' to 'uint32_t', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(481): warning C4244: '=': conversion from 'uint64_t' to 'uint32_t', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(482): warning C4244: '=': conversion from 'uint64_t' to 'uint32_t', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(483): warning C4244: '=': conversion from 'uint64_t' to 'uint32_t', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(485): warning C4244: '=': conversion from 'uint64_t' to 'uint32_t', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(486): warning C4244: '=': conversion from 'uint64_t' to 'uint32_t', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(487): warning C4244: '=': conversion from 'uint64_t' to 'uint32_t', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(488): warning C4244: '=': conversion from 'uint64_t' to 'uint32_t', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(490): warning C4244: '=': conversion from 'uint64_t' to 'uint32_t', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(491): warning C4244: '=': conversion from 'uint64_t' to 'uint32_t', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(492): warning C4244: '=': conversion from 'uint64_t' to 'uint32_t', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(493): warning C4244: '=': conversion from 'uint64_t' to 'uint32_t', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(494): warning C4244: '=': conversion from 'uint64_t' to 'uint32_t', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(496): warning C4244: '=': conversion from 'uint64_t' to 'uint32_t', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(497): warning C4244: '=': conversion from 'uint64_t' to 'uint32_t', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(498): warning C4244: '=': conversion from 'uint64_t' to 'uint32_t', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(499): warning C4244: '=': conversion from 'uint64_t' to 'uint32_t', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(500): warning C4244: '=': conversion from 'uint64_t' to 'uint32_t', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(501): warning C4244: '=': conversion from 'uint64_t' to 'uint32_t', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(503): warning C4244: '=': conversion from 'uint64_t' to 'uint32_t', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(504): warning C4244: '=': conversion from 'uint64_t' to 'uint32_t', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(505): warning C4244: '=': conversion from 'uint64_t' to 'uint32_t', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(506): warning C4244: '=': conversion from 'uint64_t' to 'uint32_t', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(507): warning C4244: '=': conversion from 'uint64_t' to 'uint32_t', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(508): warning C4244: '=': conversion from 'uint64_t' to 'uint32_t', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(509): warning C4244: '=': conversion from 'uint64_t' to 'uint32_t', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(511): warning C4244: '=': conversion from 'uint64_t' to 'uint32_t', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(512): warning C4244: '=': conversion from 'uint64_t' to 'uint32_t', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(513): warning C4244: '=': conversion from 'uint64_t' to 'uint32_t', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(514): warning C4244: '=': conversion from 'uint64_t' to 'uint32_t', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(515): warning C4244: '=': conversion from 'uint64_t' to 'uint32_t', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(516): warning C4244: '=': conversion from 'uint64_t' to 'uint32_t', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(517): warning C4244: '=': conversion from 'uint64_t' to 'uint32_t', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(518): warning C4244: '=': conversion from 'uint64_t' to 'uint32_t', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(520): warning C4244: '=': conversion from 'uint64_t' to 'uint32_t', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(521): warning C4244: '=': conversion from 'uint64_t' to 'uint32_t', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(522): warning C4244: '=': conversion from 'uint64_t' to 'uint32_t', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(523): warning C4244: '=': conversion from 'uint64_t' to 'uint32_t', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(524): warning C4244: '=': conversion from 'uint64_t' to 'uint32_t', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(525): warning C4244: '=': conversion from 'uint64_t' to 'uint32_t', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(526): warning C4244: '=': conversion from 'uint64_t' to 'uint32_t', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(528): warning C4244: '=': conversion from 'uint64_t' to 'uint32_t', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(529): warning C4244: '=': conversion from 'uint64_t' to 'uint32_t', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(530): warning C4244: '=': conversion from 'uint64_t' to 'uint32_t', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(531): warning C4244: '=': conversion from 'uint64_t' to 'uint32_t', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(532): warning C4244: '=': conversion from 'uint64_t' to 'uint32_t', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(533): warning C4244: '=': conversion from 'uint64_t' to 'uint32_t', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(535): warning C4244: '=': conversion from 'uint64_t' to 'uint32_t', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(536): warning C4244: '=': conversion from 'uint64_t' to 'uint32_t', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(537): warning C4244: '=': conversion from 'uint64_t' to 'uint32_t', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(538): warning C4244: '=': conversion from 'uint64_t' to 'uint32_t', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(539): warning C4244: '=': conversion from 'uint64_t' to 'uint32_t', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(541): warning C4244: '=': conversion from 'uint64_t' to 'uint32_t', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(542): warning C4244: '=': conversion from 'uint64_t' to 'uint32_t', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(543): warning C4244: '=': conversion from 'uint64_t' to 'uint32_t', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(544): warning C4244: '=': conversion from 'uint64_t' to 'uint32_t', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(546): warning C4244: '=': conversion from 'uint64_t' to 'uint32_t', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(547): warning C4244: '=': conversion from 'uint64_t' to 'uint32_t', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(548): warning C4244: '=': conversion from 'uint64_t' to 'uint32_t', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(550): warning C4244: '=': conversion from 'uint64_t' to 'uint32_t', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(551): warning C4244: '=': conversion from 'uint64_t' to 'uint32_t', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\scalar_8x32_impl.h(553): warning C4244: '=': conversion from 'uint64_t' to 'uint32_t', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\ecmult_impl.h(494): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\ecmult_impl.h(661): warning C4334: '<<': result of 32-bit shift implicitly converted to 64 bits (was 64-bit shift intended?)
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\hash_impl.h(267): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\ecdsa_impl.h(197): warning C4267: '=': conversion from 'size_t' to 'unsigned char', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\ecdsa_impl.h(199): warning C4267: '=': conversion from 'size_t' to 'unsigned char', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\ecdsa_impl.h(202): warning C4267: '=': conversion from 'size_t' to 'unsigned char', possible loss of data
+depend/secp256k1/src/secp256k1.c(157): warning C4127: conditional expression is constant
+depend/secp256k1/src/secp256k1.c(176): warning C4127: conditional expression is constant
+depend/secp256k1/src/secp256k1.c(258): warning C4127: conditional expression is constant
+depend/secp256k1/src/secp256k1.c(271): warning C4127: conditional expression is constant
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\modules/recovery/main_impl.h(14): warning C4127: conditional expression is constant
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\modules/recovery/main_impl.h(28): warning C4127: conditional expression is constant
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\modules/recovery/main_impl.h(35): warning C4244: '=': conversion from 'int' to 'unsigned char', possible loss of data
+C:\Users\bighe\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\secp256k1-sys-0.6.1\depend\secp256k1\src\modules/schnorrsig/main_impl.h(48): warning C4295: 'bip340_algo': array is too small to include a terminating null character
+cargo:rerun-if-env-changed=AR_x86_64-pc-windows-msvc
+AR_x86_64-pc-windows-msvc = None
+cargo:rerun-if-env-changed=AR_x86_64_pc_windows_msvc
+AR_x86_64_pc_windows_msvc = None
+cargo:rerun-if-env-changed=HOST_AR
+HOST_AR = None
+cargo:rerun-if-env-changed=AR
+AR = None
+cargo:rerun-if-env-changed=ARFLAGS
+ARFLAGS = None
+cargo:rerun-if-env-changed=HOST_ARFLAGS
+HOST_ARFLAGS = None
+cargo:rerun-if-env-changed=ARFLAGS_x86_64_pc_windows_msvc
+ARFLAGS_x86_64_pc_windows_msvc = None
+cargo:rerun-if-env-changed=ARFLAGS_x86_64-pc-windows-msvc
+ARFLAGS_x86_64-pc-windows-msvc = None
+cargo:rustc-link-lib=static=secp256k1
+cargo:rustc-link-search=native=C:\Users\bighe\Downloads\VISION-WALLET-PROTOTYPE-FIX01\bech32_probe\target\debug\build\secp256k1-sys-ae1d4a70e7b45338\out

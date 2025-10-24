@@ -1,8 +1,8 @@
 use anyhow::Result;
-use serde::{Serialize, Deserialize};
 use chrono::Utc;
-use sled;
 use lazy_static::lazy_static;
+use serde::{Deserialize, Serialize};
+use sled;
 use std::sync::Mutex;
 
 lazy_static! {
@@ -41,13 +41,18 @@ pub fn db_owned() -> sled::Db {
     }
     #[cfg(test)]
     {
-        let db_path = std::env::var("VISION_DB_PATH").unwrap_or_else(|_| "wallet_data/market".to_string());
+        let db_path =
+            std::env::var("VISION_DB_PATH").unwrap_or_else(|_| "wallet_data/market".to_string());
         std::fs::create_dir_all(&db_path).ok();
         sled::open(&db_path).expect("open sled")
     }
 }
 
-fn tree() -> sled::Tree { db_owned().open_tree("market_cash_orders").expect("open tree") }
+fn tree() -> sled::Tree {
+    db_owned()
+        .open_tree("market_cash_orders")
+        .expect("open tree")
+}
 
 pub fn put(order: &CashOrder) -> Result<()> {
     let t = tree();
@@ -58,7 +63,8 @@ pub fn put(order: &CashOrder) -> Result<()> {
 
 pub fn get(id: &str) -> Result<Option<CashOrder>> {
     let t = tree();
-    Ok(t.get(id.as_bytes())?.map(|ivec| serde_json::from_slice(&ivec).unwrap()))
+    Ok(t.get(id.as_bytes())?
+        .map(|ivec| serde_json::from_slice(&ivec).unwrap()))
 }
 
 pub fn by_session(session_id: &str) -> Result<Option<CashOrder>> {
@@ -66,7 +72,9 @@ pub fn by_session(session_id: &str) -> Result<Option<CashOrder>> {
     for item in t.iter() {
         let (_, val) = item?;
         let o: CashOrder = serde_json::from_slice(&val)?;
-        if o.stripe_session_id.as_deref() == Some(session_id) { return Ok(Some(o)); }
+        if o.stripe_session_id.as_deref() == Some(session_id) {
+            return Ok(Some(o));
+        }
     }
     Ok(None)
 }
@@ -78,7 +86,9 @@ pub fn by_payment_intent(pi_id: &str) -> Result<Option<CashOrder>> {
     for item in t.iter() {
         let (_, val) = item?;
         let o: CashOrder = serde_json::from_slice(&val)?;
-        if o.stripe_payment_intent.as_deref() == Some(pi_id) { return Ok(Some(o)); }
+        if o.stripe_payment_intent.as_deref() == Some(pi_id) {
+            return Ok(Some(o));
+        }
     }
     Ok(None)
 }
@@ -94,13 +104,25 @@ pub fn list_all() -> Result<Vec<CashOrder>> {
     Ok(out)
 }
 
-pub fn new_pending(id: String, buyer_addr: String, usd_amount_cents: u64, cash_amount: u64, stripe_session_id: Option<String>, stripe_payment_intent: Option<String>) -> CashOrder {
+pub fn new_pending(
+    id: String,
+    buyer_addr: String,
+    usd_amount_cents: u64,
+    cash_amount: u64,
+    stripe_session_id: Option<String>,
+    stripe_payment_intent: Option<String>,
+) -> CashOrder {
     let now = Utc::now().timestamp();
     CashOrder {
-        id, buyer_addr, usd_amount_cents, cash_amount,
-        stripe_session_id, stripe_payment_intent,
+        id,
+        buyer_addr,
+        usd_amount_cents,
+        cash_amount,
+        stripe_session_id,
+        stripe_payment_intent,
         status: "created".into(),
-        created_at: now, updated_at: now,
+        created_at: now,
+        updated_at: now,
     }
 }
 
@@ -127,7 +149,9 @@ pub fn migrate_legacy_prefix() -> Result<u64> {
             migrated += 1;
         }
     }
-    if migrated > 0 { t_new.flush()?; }
+    if migrated > 0 {
+        t_new.flush()?;
+    }
     // store last migration
     *LAST_MIGRATION.lock().unwrap() = Some(migrated);
     Ok(migrated)
@@ -135,7 +159,9 @@ pub fn migrate_legacy_prefix() -> Result<u64> {
 
 #[cfg(any(test, feature = "dev"))]
 #[allow(dead_code)]
-pub fn last_migration_count() -> Option<u64> { *LAST_MIGRATION.lock().unwrap() }
+pub fn last_migration_count() -> Option<u64> {
+    *LAST_MIGRATION.lock().unwrap()
+}
 
 /// Delete legacy keys with prefix `cash_order:` from the DB root.
 /// Returns number removed.

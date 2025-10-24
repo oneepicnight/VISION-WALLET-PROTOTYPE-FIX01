@@ -26,11 +26,7 @@ npm run dev
 
 # Open http://localhost:5173 in your browser
 ```
-
-## 📋 Requirements
-
 - **Node.js 16+** - Download from [nodejs.org](https://nodejs.org/)
-- **Modern web browser** (Chrome, Firefox, Safari, Edge)
 - **Internet connection** (for initial setup only)
 
 ## 🎯 Getting Started
@@ -38,9 +34,6 @@ npm run dev
 1. **Run quick-start** - Use one of the quick-start files above
 2. **Open wallet** - Navigate to http://localhost:5173
 3. **Create handle** - Choose your unique username (e.g., @neo-vision)
-4. **Save recovery words** - Write down your 12-word backup phrase
-5. **Start using** - Send/receive tokens, manage balances
-
 ## 🔐 Security Features
 
 - ✅ **Local encryption** - All keys stored encrypted on your device
@@ -48,6 +41,8 @@ npm run dev
 - ✅ **No telemetry** - No data sent to third parties
 - ✅ **Open source** - Full code transparency
 
+### Notes on implementation
+The project decodes Bech32/SegWit addresses using the `bech32` crate and follows BIP-0173 / BIP-0350 rules by default. A permissive fallback exists for local debugging but is gated behind compile-time features to avoid accidental use in production: compile with `--features dev` (used for local tests) or `--features bech32-permissive` to enable the permissive fallback.
 ## 🔧 Advanced Commands
 
 ```bash
@@ -212,6 +207,43 @@ The workflow runs on **Ubuntu & Windows**:
 - `cargo clippy --all-targets --all-features -- -D warnings`
 - `cargo test` (Windows uses single-thread to avoid sled lock contention)
 - Stripe webhooks are simulated with `STRIPE_TEST_NO_VERIFY=1`
+ 
+### Address parsing permissive feature
+
+We include a narrowly-scoped permissive fallback for address parsing that
+handles an off-by-one padding artifact that can appear during 5→8 bit
+conversions on some platforms or libraries. This fallback is intentionally
+gated behind compile-time features so production builds remain strict by
+default.
+
+- Enable permissive parsing only for local development or CI diagnostic runs:
+	- `--features dev` (already used for a set of dev helpers)
+	- or `--features bech32-permissive` to enable only the Bech32/CashAddr
+		permissive trimming behavior.
+
+- Recommended usage:
+	- CI (diagnostics): enable `bech32-permissive` on a neutral runner (e.g.
+		Ubuntu) when investigating platform-specific checksum/convert issues.
+	- Production releases: do NOT enable this feature. Keep parsing strict to
+		avoid accepting malformed addresses.
+
+Examples:
+
+```bash
+# Run the BCH CashAddr focused test with permissive parsing enabled
+cargo test --test scripthash_bch_cashaddr --features bech32-permissive -- --nocapture
+
+# Run all tests with dev features (local only)
+cargo test -j 1 --features dev
+```
+
+CI note: Bech32 diagnostic workflow
+
+We run a small, fast diagnostic job in GitHub Actions to validate Bech32
+polymod / checksum behavior on `ubuntu-latest`. See
+`.github/workflows/bech32-strict-test.yml` for the job definition. If you
+see platform-specific checksum failures locally, run the diagnostic job or
+enable the `bech32-permissive` feature locally to help triage.
 
 ### Windows testing note (sled)
 Avoid opening the same sled path twice from different processes.
@@ -237,3 +269,26 @@ git add -A
 git commit -m "chore: enable dev feature gating, add CI, clippy gates, and docs"
 git branch -M main
 ```
+
+## Confirmations & Watchers
+
+### Exact confirmations
+Watchers compute confirmations precisely:
+`confirmations = tip_height - tx_height + 1`
+We obtain `tip_height` via `blockchain.headers.subscribe`. Thresholds come from `vision.toml` or `CONF_*` env.
+
+### Scripthash fast path
+We query Electrum with `blockchain.scripthash.get_history` when we can derive a **scriptPubKey** from the invoice address:
+- **BTC**: legacy Base58 **P2PKH** and Bech32 SegWit v0 (P2WPKH/P2WSH) supported ✅
+- **BCH**: **CashAddr P2PKH/P2SH** ✅ and legacy **Base58 P2PKH** ✅
+- **DOGE**: legacy Base58 **P2PKH** supported
+
+If an address can’t be parsed into a script, we fall back to `address.get_history` and then an HTTP explorer.
+
+### Mock-chain mode (zero-network demos)
+- Enable: `MOCK_CHAIN=1` (or `[test].mock_chain = true` in `vision.toml`)
+- Any listing with `pay_to` starting with `mock:` or `demo:` is **confirmed immediately**
+- Confirm callback target: `MARKET_CONFIRM_URL=http://127.0.0.1:<port>/_market/land/confirm`
+
+### Electrum plaintext (tests)
+- `ELECTRUM_PLAINTEXT=1` allows plaintext Electrum for local mocks in tests.

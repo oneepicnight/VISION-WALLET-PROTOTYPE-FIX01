@@ -1,10 +1,14 @@
-use axum::{Router, routing::{get, post}, Json, extract::{Extension, Path}};
-use serde::{Serialize, Deserialize};
-use sled::Db;
-use uuid::Uuid;
-use chrono::Utc;
-use std::sync::Arc;
 use axum::http::StatusCode;
+use axum::{
+    extract::{Extension, Path},
+    routing::{get, post},
+    Json, Router,
+};
+use chrono::Utc;
+use serde::{Deserialize, Serialize};
+use sled::Db;
+use std::sync::Arc;
+use uuid::Uuid;
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct LandListing {
@@ -28,8 +32,12 @@ pub struct CreateListingReq {
     pub price_chain: String,
 }
 
-fn tree_name_listings() -> &'static str { "market_land_listings" }
-fn tree_name_settlements() -> &'static str { "market_land_settlements" }
+fn tree_name_listings() -> &'static str {
+    "market_land_listings"
+}
+fn tree_name_settlements() -> &'static str {
+    "market_land_settlements"
+}
 
 pub fn router(_db: Arc<Db>) -> axum::Router {
     Router::new()
@@ -40,19 +48,29 @@ pub fn router(_db: Arc<Db>) -> axum::Router {
         .route("/_market/land/confirm", post(confirm_and_transfer))
 }
 
-async fn get_listing_by_id(Extension(_db): Extension<Arc<Db>>, Path(id): Path<String>) -> (StatusCode, Json<serde_json::Value>) {
+async fn get_listing_by_id(
+    Extension(_db): Extension<Arc<Db>>,
+    Path(id): Path<String>,
+) -> (StatusCode, Json<serde_json::Value>) {
     let tree = _db.open_tree(tree_name_listings()).unwrap();
     if let Ok(Some(v)) = tree.get(id.as_bytes()) {
         if let Ok(listing) = serde_json::from_slice::<LandListing>(&v) {
             return (StatusCode::OK, Json(serde_json::json!(listing)));
         }
     }
-    (StatusCode::NOT_FOUND, Json(serde_json::json!({"error":"not found"})))
+    (
+        StatusCode::NOT_FOUND,
+        Json(serde_json::json!({"error":"not found"})),
+    )
 }
 
-async fn create_listing(Extension(db): Extension<Arc<Db>>, Json(payload): Json<CreateListingReq>) -> (StatusCode, Json<LandListing>) {
+async fn create_listing(
+    Extension(db): Extension<Arc<Db>>,
+    Json(payload): Json<CreateListingReq>,
+) -> (StatusCode, Json<LandListing>) {
     let listing_id = Uuid::new_v4().to_string();
-    let pay_to = crate::market::crypto_watch::generate_invoice_address(&payload.price_chain, &listing_id);
+    let pay_to =
+        crate::market::crypto_watch::generate_invoice_address(&payload.price_chain, &listing_id);
 
     let listing = LandListing {
         listing_id: listing_id.clone(),
@@ -68,13 +86,17 @@ async fn create_listing(Extension(db): Extension<Arc<Db>>, Json(payload): Json<C
     };
 
     let tree = db.open_tree(tree_name_listings()).unwrap();
-    tree.insert(listing_id.as_bytes(), serde_json::to_vec(&listing).unwrap()).unwrap();
+    tree.insert(listing_id.as_bytes(), serde_json::to_vec(&listing).unwrap())
+        .unwrap();
     tree.flush().unwrap();
 
+    log::info!("created listing id={} pay_to={}", listing_id, pay_to);
     (StatusCode::CREATED, Json(listing))
 }
 
-async fn list_open_listings(Extension(db): Extension<Arc<Db>>) -> (StatusCode, Json<Vec<LandListing>>) {
+async fn list_open_listings(
+    Extension(db): Extension<Arc<Db>>,
+) -> (StatusCode, Json<Vec<LandListing>>) {
     let tree = db.open_tree(tree_name_listings()).unwrap();
     let mut out: Vec<LandListing> = vec![];
     for (_, v) in tree.iter().flatten() {
@@ -84,6 +106,7 @@ async fn list_open_listings(Extension(db): Extension<Arc<Db>>) -> (StatusCode, J
             }
         }
     }
+    log::info!("list_open_listings returning {} open listings", out.len());
     (StatusCode::OK, Json(out))
 }
 
@@ -93,18 +116,28 @@ pub struct SignalPaymentReq {
     pub txid: Option<String>,
 }
 
-async fn signal_payment(Extension(db): Extension<Arc<Db>>, Json(payload): Json<SignalPaymentReq>) -> (StatusCode, Json<serde_json::Value>) {
+async fn signal_payment(
+    Extension(db): Extension<Arc<Db>>,
+    Json(payload): Json<SignalPaymentReq>,
+) -> (StatusCode, Json<serde_json::Value>) {
     let tree = db.open_tree(tree_name_listings()).unwrap();
     if let Ok(Some(v)) = tree.get(payload.listing_id.as_bytes()) {
         if let Ok(mut listing) = serde_json::from_slice::<LandListing>(&v) {
             listing.status = "in_mempool".to_string();
             listing.buyer_expected_txid = payload.txid.clone();
-            tree.insert(payload.listing_id.as_bytes(), serde_json::to_vec(&listing).unwrap()).unwrap();
+            tree.insert(
+                payload.listing_id.as_bytes(),
+                serde_json::to_vec(&listing).unwrap(),
+            )
+            .unwrap();
             tree.flush().unwrap();
             return (StatusCode::OK, Json(serde_json::json!(listing)));
         }
     }
-    (StatusCode::NOT_FOUND, Json(serde_json::json!({"error":"listing not found"})))
+    (
+        StatusCode::NOT_FOUND,
+        Json(serde_json::json!({"error":"listing not found"})),
+    )
 }
 
 #[derive(Deserialize)]
@@ -114,12 +147,19 @@ pub struct ConfirmReq {
     pub chain: String,
 }
 
-async fn confirm_and_transfer(Extension(db): Extension<Arc<Db>>, Json(payload): Json<ConfirmReq>) -> (StatusCode, Json<serde_json::Value>) {
+async fn confirm_and_transfer(
+    Extension(db): Extension<Arc<Db>>,
+    Json(payload): Json<ConfirmReq>,
+) -> (StatusCode, Json<serde_json::Value>) {
     let tree = db.open_tree(tree_name_listings()).unwrap();
     if let Ok(Some(v)) = tree.get(payload.listing_id.as_bytes()) {
         if let Ok(mut listing) = serde_json::from_slice::<LandListing>(&v) {
             listing.status = "settled".to_string();
-            tree.insert(payload.listing_id.as_bytes(), serde_json::to_vec(&listing).unwrap()).unwrap();
+            tree.insert(
+                payload.listing_id.as_bytes(),
+                serde_json::to_vec(&listing).unwrap(),
+            )
+            .unwrap();
             tree.flush().unwrap();
 
             let settlement_tree = db.open_tree(tree_name_settlements()).unwrap();
@@ -131,13 +171,24 @@ async fn confirm_and_transfer(Extension(db): Extension<Arc<Db>>, Json(payload): 
                 "conf_count": 0,
                 "confirmed_at": Utc::now().timestamp_millis()
             });
-            settlement_tree.insert(payload.listing_id.as_bytes(), serde_json::to_vec(&rec).unwrap()).unwrap();
+            settlement_tree
+                .insert(
+                    payload.listing_id.as_bytes(),
+                    serde_json::to_vec(&rec).unwrap(),
+                )
+                .unwrap();
             settlement_tree.flush().unwrap();
 
-            return (StatusCode::OK, Json(serde_json::json!({"status":"settled"})))
+            return (
+                StatusCode::OK,
+                Json(serde_json::json!({"status":"settled"})),
+            );
         }
     }
-    (StatusCode::NOT_FOUND, Json(serde_json::json!({"error":"listing not found"})))
+    (
+        StatusCode::NOT_FOUND,
+        Json(serde_json::json!({"error":"listing not found"})),
+    )
 }
 
 // Ledger helper stubs (to be implemented against Vision node ledger)
