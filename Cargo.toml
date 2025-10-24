@@ -39,6 +39,10 @@ sha2 = "0.10"
 bs58 = "0.5"
 bech32 = "0.9"
 bitcoin = "0.29"
+bytes = "1.4"
+async-trait = "0.1"
+base64 = "0.21"
+parking_lot = "0.12"
 
 [dev-dependencies]
 tempfile = "3.9"
