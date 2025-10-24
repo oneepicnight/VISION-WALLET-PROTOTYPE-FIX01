@@ -119,10 +119,13 @@ fn bech32_witness_program_permissive(addr: &str) -> Option<(u8, Vec<u8>)> {
 
 /// BTC: support Bech32 v0 P2WPKH/P2WSH and legacy Base58 P2PKH
 pub fn btc_address_to_script(addr: &str) -> Option<Vec<u8>> {
-    let permissive = std::env::var("BECH32_PERMISSIVE")
-        .ok()
-        .map(|s| s == "1" || s.eq_ignore_ascii_case("true"))
-        .unwrap_or(false);
+    // Permissive fallback for bech32 is gated behind compile-time features to
+    // avoid relaxing checks in production builds. Enable by compiling with
+    // --features dev (used in local/dev test runs) or --features bech32-permissive.
+    #[cfg(any(feature = "dev", feature = "bech32-permissive"))]
+    let permissive = true;
+    #[cfg(not(any(feature = "dev", feature = "bech32-permissive")))]
+    let permissive = false;
 
     // 1) Bech32 segwit v0
     let witness = if !permissive {

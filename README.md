@@ -26,11 +26,7 @@ npm run dev
 
 # Open http://localhost:5173 in your browser
 ```
-
-## 📋 Requirements
-
 - **Node.js 16+** - Download from [nodejs.org](https://nodejs.org/)
-- **Modern web browser** (Chrome, Firefox, Safari, Edge)
 - **Internet connection** (for initial setup only)
 
 ## 🎯 Getting Started
@@ -38,9 +34,6 @@ npm run dev
 1. **Run quick-start** - Use one of the quick-start files above
 2. **Open wallet** - Navigate to http://localhost:5173
 3. **Create handle** - Choose your unique username (e.g., @neo-vision)
-4. **Save recovery words** - Write down your 12-word backup phrase
-5. **Start using** - Send/receive tokens, manage balances
-
 ## 🔐 Security Features
 
 - ✅ **Local encryption** - All keys stored encrypted on your device
@@ -48,6 +41,8 @@ npm run dev
 - ✅ **No telemetry** - No data sent to third parties
 - ✅ **Open source** - Full code transparency
 
+### Notes on implementation
+The project decodes Bech32/SegWit addresses using the `bech32` crate and follows BIP-0173 / BIP-0350 rules by default. A permissive fallback is available for local debugging (`BECH32_PERMISSIVE=1`) but is not recommended for CI or production.
 ## 🔧 Advanced Commands
 
 ```bash
@@ -237,3 +232,26 @@ git add -A
 git commit -m "chore: enable dev feature gating, add CI, clippy gates, and docs"
 git branch -M main
 ```
+
+## Confirmations & Watchers
+
+### Exact confirmations
+Watchers compute confirmations precisely:
+`confirmations = tip_height - tx_height + 1`
+We obtain `tip_height` via `blockchain.headers.subscribe`. Thresholds come from `vision.toml` or `CONF_*` env.
+
+### Scripthash fast path
+We query Electrum with `blockchain.scripthash.get_history` when we can derive a **scriptPubKey** from the invoice address:
+- **BTC**: legacy Base58 **P2PKH** and Bech32 SegWit v0 (P2WPKH/P2WSH) supported ✅
+- **BCH**: legacy **Base58 P2PKH** supported; **CashAddr** currently falls back to `address.get_history`
+- **DOGE**: legacy Base58 **P2PKH** supported
+
+If an address can’t be parsed into a script, we fall back to `address.get_history` and then an HTTP explorer.
+
+### Mock-chain mode (zero-network demos)
+- Enable: `MOCK_CHAIN=1` (or `[test].mock_chain = true` in `vision.toml`)
+- Any listing with `pay_to` starting with `mock:` or `demo:` is **confirmed immediately**
+- Confirm callback target: `MARKET_CONFIRM_URL=http://127.0.0.1:<port>/_market/land/confirm`
+
+### Electrum plaintext (tests)
+- `ELECTRUM_PLAINTEXT=1` allows plaintext Electrum for local mocks in tests.
