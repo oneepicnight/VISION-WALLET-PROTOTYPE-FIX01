@@ -583,14 +583,12 @@ async fn one_cycle(cfg: &ChainConf) -> Result<()> {
 }
 
 // --- optional test hook ---
-#[cfg(any(test, feature = "dev"))]
 #[allow(dead_code)]
 pub fn with_test_notify(_hook: fn()) {
     // intentionally left as a test/dev hook
 }
 
 // Exported test wrapper that allows integration tests to run a single watcher cycle
-#[cfg(any(test, feature = "dev"))]
 #[allow(dead_code)]
 pub async fn one_cycle_for_test(cfg: ChainConf) -> anyhow::Result<()> {
     one_cycle(&cfg).await
