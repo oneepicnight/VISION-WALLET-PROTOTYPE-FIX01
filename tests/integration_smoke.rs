@@ -4,8 +4,14 @@ use std::time::Duration;
 
 #[test]
 fn simple_server_smoke() {
-    // Try to start the simple_server binary directly if built, otherwise run via cargo
-    let exe = std::path::Path::new("target/debug/simple_server.exe");
+    // Prefer the platform-specific built binary so tests don't fall back to
+    // `cargo run` (which can trigger a build and cause timing/race issues).
+    let exe_path = if cfg!(windows) {
+        "target/debug/simple_server.exe"
+    } else {
+        "target/debug/simple_server"
+    };
+    let exe = std::path::Path::new(exe_path);
     let mut child = if exe.exists() {
         Command::new(exe)
             .spawn()
