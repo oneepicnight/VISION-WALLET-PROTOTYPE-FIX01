@@ -1,8 +1,8 @@
 use serde_json::Value;
 use std::process::{Child, Command};
 use std::sync::{Arc, Mutex};
-use std::thread::sleep;
 use std::time::Duration;
+use tokio::time::sleep;
 mod common;
 
 fn spawn_vision_market_with_env(db_path: &str, electrum_mock_url: &str) -> Child {
@@ -182,8 +182,8 @@ fn start_confirm_receiver() -> (
     (format!("http://127.0.0.1:{}", port), seen, shutdown_tx)
 }
 
-#[test]
-fn e2e_create_signal_confirm_with_watcher() {
+#[tokio::test]
+async fn e2e_create_signal_confirm_with_watcher() {
     common::init_test_tracing();
     use tempfile::tempdir;
     let td = tempdir().expect("tempdir");
@@ -195,15 +195,15 @@ fn e2e_create_signal_confirm_with_watcher() {
 
     // wait for mock to be ready (tcp connect)
     let mock_port: u16 = mock_url.split(':').next_back().unwrap().parse().unwrap();
-    let addr = std::net::SocketAddr::new("127.0.0.1".parse().unwrap(), mock_port);
+    let addr = format!("127.0.0.1:{}", mock_port);
     let start = std::time::Instant::now();
     let mut ready = false;
     while start.elapsed() < Duration::from_secs(10) {
-        if std::net::TcpStream::connect_timeout(&addr, Duration::from_millis(200)).is_ok() {
+        if tokio::net::TcpStream::connect(&addr).await.is_ok() {
             ready = true;
             break;
         }
-        sleep(Duration::from_millis(200));
+        sleep(Duration::from_millis(200)).await;
     }
     assert!(ready, "mock did not become ready");
 
@@ -211,27 +211,22 @@ fn e2e_create_signal_confirm_with_watcher() {
     std::env::set_var("VISION_WATCH_POLL_SECS", "1");
     let (confirm_url, confirm_seen, confirm_shutdown) = start_confirm_receiver();
     std::env::set_var("VISION_SERVER_URL", &confirm_url);
-    sleep(Duration::from_millis(200));
+    sleep(Duration::from_millis(200)).await;
 
     let mut child = spawn_vision_market_with_env(&db_path, &mock_url);
     // wait for server to accept connections on 127.0.0.1:8080 (timeout 10s)
     let start = std::time::Instant::now();
     let mut server_ready = false;
     while start.elapsed() < Duration::from_secs(10) {
-        if std::net::TcpStream::connect_timeout(
-            &"127.0.0.1:8080".parse().unwrap(),
-            Duration::from_millis(200),
-        )
-        .is_ok()
-        {
+        if tokio::net::TcpStream::connect("127.0.0.1:8080").await.is_ok() {
             server_ready = true;
             break;
         }
-        sleep(Duration::from_millis(200));
+        sleep(Duration::from_millis(200)).await;
     }
     assert!(server_ready, "server did not start in time");
 
-    let client = reqwest::blocking::Client::new();
+    let client = reqwest::Client::new();
     let create_body = serde_json::json!({
         "seller_addr": "seller1",
         "qty_land": 100,
@@ -242,9 +237,10 @@ fn e2e_create_signal_confirm_with_watcher() {
         .post("http://127.0.0.1:8080/market/land/list")
         .json(&create_body)
         .send()
+        .await
         .expect("create failed");
     assert_eq!(resp.status().as_u16(), 201);
-    let created: Value = resp.json().expect("invalid create json");
+    let created: Value = resp.json().await.expect("invalid create json");
     let pay_to = created["pay_to"].as_str().unwrap().to_string();
 
     {
@@ -255,9 +251,10 @@ fn e2e_create_signal_confirm_with_watcher() {
     // Nudge the watcher via testhook endpoint if available
     if std::env::var("VISION_TEST_HOOKS").ok().as_deref() == Some("1") {
         let base = "http://127.0.0.1:8080".to_string();
-        let _ = reqwest::blocking::Client::new()
+        let _ = reqwest::Client::new()
             .post(format!("{}/__test/watcher_tick", base))
-            .send();
+            .send()
+            .await;
     }
 
     // wait up to 20s for confirm POST -> then assert listing is settled by checking sled DB directly
@@ -278,8 +275,9 @@ fn e2e_create_signal_confirm_with_watcher() {
                 created["listing_id"].as_str().unwrap()
             ))
             .send()
+            .await
         {
-            if let Ok(listing_json) = resp.json::<serde_json::Value>() {
+            if let Ok(listing_json) = resp.json::<serde_json::Value>().await {
                 if listing_json.get("status").and_then(|s| s.as_str()) == Some("settled")
                     && got_confirm
                 {
@@ -288,7 +286,7 @@ fn e2e_create_signal_confirm_with_watcher() {
             }
         }
 
-        sleep(Duration::from_millis(200));
+        sleep(Duration::from_millis(200)).await;
     }
     assert!(
         got_confirm,
