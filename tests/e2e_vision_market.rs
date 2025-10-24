@@ -1,8 +1,8 @@
-use std::process::{Command, Child};
+use serde_json::Value;
+use std::process::{Child, Command};
+use std::sync::{Arc, Mutex};
 use std::thread::sleep;
 use std::time::Duration;
-use serde_json::Value;
-use std::sync::{Arc, Mutex};
 mod common;
 
 fn spawn_vision_market_with_env(db_path: &str, electrum_mock_url: &str) -> Child {
@@ -33,12 +33,15 @@ fn spawn_vision_market_with_env(db_path: &str, electrum_mock_url: &str) -> Child
     cmd.spawn().expect("failed to spawn vision-market")
 }
 
-fn start_mock_electrum_server(registered: Arc<Mutex<std::collections::HashSet<String>>>, seen: Arc<Mutex<Vec<String>>>) -> (String, tokio::sync::oneshot::Sender<()>) {
-    use hyper::{Server, Body, Request, Response, Method, StatusCode};
+fn start_mock_electrum_server(
+    registered: Arc<Mutex<std::collections::HashSet<String>>>,
+    seen: Arc<Mutex<Vec<String>>>,
+) -> (String, tokio::sync::oneshot::Sender<()>) {
     use hyper::service::{make_service_fn, service_fn};
+    use hyper::{Body, Method, Request, Response, Server, StatusCode};
+    use serde_json::json;
     use std::convert::Infallible;
     use tokio::runtime::Runtime;
-    use serde_json::json;
 
     let listener = std::net::TcpListener::bind(("127.0.0.1", 0)).expect("find free port");
     let port = listener.local_addr().unwrap().port();
@@ -106,9 +109,13 @@ fn start_mock_electrum_server(registered: Arc<Mutex<std::collections::HashSet<St
     (format!("http://127.0.0.1:{}", port), shutdown_tx)
 }
 
-fn start_confirm_receiver() -> (String, Arc<Mutex<Vec<serde_json::Value>>>, tokio::sync::oneshot::Sender<()>) {
-    use hyper::{Server, Body, Request, Response, Method, StatusCode};
+fn start_confirm_receiver() -> (
+    String,
+    Arc<Mutex<Vec<serde_json::Value>>>,
+    tokio::sync::oneshot::Sender<()>,
+) {
     use hyper::service::{make_service_fn, service_fn};
+    use hyper::{Body, Method, Request, Response, Server, StatusCode};
     use std::convert::Infallible;
     use tokio::runtime::Runtime;
 
@@ -124,21 +131,30 @@ fn start_confirm_receiver() -> (String, Arc<Mutex<Vec<serde_json::Value>>>, toki
     std::thread::spawn(move || {
         let rt = Runtime::new().expect("tokio rt");
         rt.block_on(async move {
-            let addr = ([127,0,0,1], port).into();
+            let addr = ([127, 0, 0, 1], port).into();
             let make_svc = make_service_fn(move |_conn| {
                 let seen_conn = seen_clone.clone();
                 async move {
                     Ok::<_, Infallible>(service_fn(move |req: Request<Body>| {
                         let seen = seen_conn.clone();
                         async move {
-                            if req.method() == Method::POST && req.uri().path() == "/_market/land/confirm" {
-                                let bytes = hyper::body::to_bytes(req.into_body()).await.unwrap_or_default();
+                            if req.method() == Method::POST
+                                && req.uri().path() == "/_market/land/confirm"
+                            {
+                                let bytes = hyper::body::to_bytes(req.into_body())
+                                    .await
+                                    .unwrap_or_default();
                                 if let Ok(v) = serde_json::from_slice::<serde_json::Value>(&bytes) {
                                     let mut s = seen.lock().unwrap();
                                     s.push(v);
                                     return Ok::<_, Infallible>(Response::new(Body::from("ok")));
                                 }
-                                return Ok::<_, Infallible>(Response::builder().status(StatusCode::BAD_REQUEST).body(Body::from("bad json")).unwrap());
+                                return Ok::<_, Infallible>(
+                                    Response::builder()
+                                        .status(StatusCode::BAD_REQUEST)
+                                        .body(Body::from("bad json"))
+                                        .unwrap(),
+                                );
                             }
                             Ok::<_, Infallible>(Response::new(Body::from("ok")))
                         }
@@ -189,7 +205,22 @@ fn e2e_create_signal_confirm_with_watcher() {
     sleep(Duration::from_millis(200));
 
     let mut child = spawn_vision_market_with_env(&db_path, &mock_url);
-    sleep(Duration::from_millis(800));
+    // wait for server to accept connections on 127.0.0.1:8080 (timeout 10s)
+    let start = std::time::Instant::now();
+    let mut server_ready = false;
+    while start.elapsed() < Duration::from_secs(10) {
+        if std::net::TcpStream::connect_timeout(
+            &"127.0.0.1:8080".parse().unwrap(),
+            Duration::from_millis(200),
+        )
+        .is_ok()
+        {
+            server_ready = true;
+            break;
+        }
+        sleep(Duration::from_millis(200));
+    }
+    assert!(server_ready, "server did not start in time");
 
     let client = reqwest::blocking::Client::new();
     let create_body = serde_json::json!({
@@ -198,7 +229,11 @@ fn e2e_create_signal_confirm_with_watcher() {
         "price_amount": 1000,
         "price_chain": "BTC"
     });
-    let resp = client.post("http://127.0.0.1:8080/market/land/list").json(&create_body).send().expect("create failed");
+    let resp = client
+        .post("http://127.0.0.1:8080/market/land/list")
+        .json(&create_body)
+        .send()
+        .expect("create failed");
     assert_eq!(resp.status().as_u16(), 201);
     let created: Value = resp.json().expect("invalid create json");
     let pay_to = created["pay_to"].as_str().unwrap().to_string();
@@ -211,7 +246,9 @@ fn e2e_create_signal_confirm_with_watcher() {
     // Nudge the watcher via testhook endpoint if available
     if std::env::var("VISION_TEST_HOOKS").ok().as_deref() == Some("1") {
         let base = "http://127.0.0.1:8080".to_string();
-    let _ = reqwest::blocking::Client::new().post(format!("{}/__test/watcher_tick", base)).send();
+        let _ = reqwest::blocking::Client::new()
+            .post(format!("{}/__test/watcher_tick", base))
+            .send();
     }
 
     // wait up to 20s for confirm POST -> then assert listing is settled by checking sled DB directly
@@ -226,9 +263,17 @@ fn e2e_create_signal_confirm_with_watcher() {
         }
 
         // Query the running server for the listing status instead of opening sled (avoids DB locking between processes on Windows)
-    if let Ok(resp) = client.get(format!("http://127.0.0.1:8080/market/land/listings/{}", created["listing_id"].as_str().unwrap())).send() {
+        if let Ok(resp) = client
+            .get(format!(
+                "http://127.0.0.1:8080/market/land/listings/{}",
+                created["listing_id"].as_str().unwrap()
+            ))
+            .send()
+        {
             if let Ok(listing_json) = resp.json::<serde_json::Value>() {
-                if listing_json.get("status").and_then(|s| s.as_str()) == Some("settled") && got_confirm {
+                if listing_json.get("status").and_then(|s| s.as_str()) == Some("settled")
+                    && got_confirm
+                {
                     break;
                 }
             }
@@ -236,10 +281,16 @@ fn e2e_create_signal_confirm_with_watcher() {
 
         sleep(Duration::from_millis(200));
     }
-    assert!(got_confirm, "confirm receiver did not get a POST from the watcher");
+    assert!(
+        got_confirm,
+        "confirm receiver did not get a POST from the watcher"
+    );
 
     let seen_addrs = seen.lock().unwrap();
-    assert!(seen_addrs.iter().any(|a| a == &pay_to), "mock electrum did not receive a request for the pay_to address");
+    assert!(
+        seen_addrs.iter().any(|a| a == &pay_to),
+        "mock electrum did not receive a request for the pay_to address"
+    );
 
     // Clean up
     let _ = child.kill();
@@ -247,4 +298,3 @@ fn e2e_create_signal_confirm_with_watcher() {
     let _ = mock_shutdown.send(());
     let _ = confirm_shutdown.send(());
 }
-

@@ -28,7 +28,8 @@ async fn migrates_legacy_and_allows_cleanup() {
 
     // new tree contains the order under key "abc123"
     let tree = vision_market::market::cash_store::db_owned()
-        .open_tree("market_cash_orders").unwrap();
+        .open_tree("market_cash_orders")
+        .unwrap();
     let got = tree.get("abc123").unwrap().expect("migrated row");
     let parsed: serde_json::Value = serde_json::from_slice(&got).unwrap();
     assert_eq!(parsed["id"], "abc123");
@@ -37,7 +38,9 @@ async fn migrates_legacy_and_allows_cleanup() {
     // destructive cleanup optional
     let removed = vision_market::market::cash_store::cleanup_legacy_prefix().unwrap();
     assert_eq!(removed, 1);
-    let after = vision_market::market::cash_store::db_owned().get(key).unwrap();
+    let after = vision_market::market::cash_store::db_owned()
+        .get(key)
+        .unwrap();
     assert!(after.is_none());
 
     // restore cwd

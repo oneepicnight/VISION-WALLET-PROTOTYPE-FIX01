@@ -1,9 +1,9 @@
 // reqwest is used fully-qualified below
 use serde_json::json;
-use std::process::Command;
-use tempfile::tempdir;
-use std::time::Duration;
 use std::path::Path;
+use std::process::Command;
+use std::time::Duration;
+use tempfile::tempdir;
 
 #[tokio::test]
 async fn listing_endpoints_smoke() {
@@ -16,7 +16,7 @@ async fn listing_endpoints_smoke() {
         Command::new(exe)
     } else {
         let mut c = Command::new("cargo");
-    c.args(["run", "--bin", "vision-market"]);
+        c.args(["run", "--bin", "vision-market"]);
         c
     };
     cmd.env("VISION_DB_PATH", &db_path);
@@ -27,7 +27,8 @@ async fn listing_endpoints_smoke() {
 
     let client = reqwest::Client::new();
 
-    let create = client.post("http://127.0.0.1:8080/market/land/list")
+    let create = client
+        .post("http://127.0.0.1:8080/market/land/list")
         .json(&json!({
             "seller_addr": "0xSeller",
             "qty_land": 100u64,
@@ -40,7 +41,8 @@ async fn listing_endpoints_smoke() {
 
     assert!(create.status().is_success());
 
-    let list = client.get("http://127.0.0.1:8080/market/land/listings")
+    let list = client
+        .get("http://127.0.0.1:8080/market/land/listings")
         .send()
         .await
         .expect("request failed");

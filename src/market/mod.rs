@@ -1,12 +1,12 @@
 use axum::Router;
-pub mod land;
 pub mod cash;
+pub mod cash_admin;
 pub mod cash_store;
 pub mod crypto_watch;
-pub mod fiat_stripe;
-pub mod oracle;
-pub mod cash_admin;
 pub mod cursor;
+pub mod fiat_stripe;
+pub mod land;
+pub mod oracle;
 use std::sync::Arc;
 
 pub fn router() -> Router {
@@ -20,31 +20,38 @@ pub fn router() -> Router {
     {
         use tokio::sync::Notify;
         let notify = std::sync::Arc::new(Notify::new());
-        // pass notify into spawn
-        tokio::spawn(crate::market::crypto_watch::spawn_crypto_watchers(shared.clone(), Some(notify.clone())));
+        // testhooks: do not spawn watchers here; main spawns them to avoid dup tasks
         // mount testhooks routes
-        use axum::{routing::post, extract::State, Json};
+        use axum::{extract::State, routing::post, Json};
         #[derive(Clone)]
-        struct TestHookState { notify: std::sync::Arc<Notify> }
-        let th = TestHookState { notify: notify.clone() };
-        let test_router = axum::Router::new().route("/__test/watcher_tick", post(move |State(st): State<TestHookState>| async move {
-            st.notify.notify_one();
-            Json(serde_json::json!({"ok": true}))
-        })).with_state(th);
-            Router::new()
-                .merge(land::router(shared.clone()))
-                .merge(cash::router())
-                .merge(fiat_stripe::router())
-                .merge(oracle::router())
-                .merge(cash_admin::router())
-                .merge(test_router)
-                .layer(axum::extract::Extension(shared))
+        struct TestHookState {
+            notify: std::sync::Arc<Notify>,
+        }
+        let th = TestHookState {
+            notify: notify.clone(),
+        };
+        let test_router = axum::Router::new()
+            .route(
+                "/__test/watcher_tick",
+                post(move |State(st): State<TestHookState>| async move {
+                    st.notify.notify_one();
+                    Json(serde_json::json!({"ok": true}))
+                }),
+            )
+            .with_state(th);
+        Router::new()
+            .merge(land::router(shared.clone()))
+            .merge(cash::router())
+            .merge(fiat_stripe::router())
+            .merge(oracle::router())
+            .merge(cash_admin::router())
+            .merge(test_router)
+            .layer(axum::extract::Extension(shared))
     }
 
     #[cfg(not(feature = "testhooks"))]
     {
-        // default wiring
-        tokio::spawn(crate::market::crypto_watch::spawn_crypto_watchers(shared.clone(), None));
+        // default wiring: watchers are spawned from `main.rs` to avoid duplicate tasks
 
         Router::new()
             .merge(land::router(shared.clone()))

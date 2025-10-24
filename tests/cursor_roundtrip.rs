@@ -13,4 +13,3 @@ fn cursor_roundtrip() {
         assert_eq!(back.1, id);
     }
 }
-

@@ -1,7 +1,10 @@
-use axum::{Router, routing::{get, post}, Json};
-use serde::{Serialize, Deserialize};
-use std::sync::Mutex;
+use axum::{
+    routing::{get, post},
+    Json, Router,
+};
 use lazy_static::lazy_static;
+use serde::{Deserialize, Serialize};
+use std::sync::Mutex;
 
 lazy_static! {
     static ref ORACLE: Mutex<Rates> = Mutex::new(Rates::default());

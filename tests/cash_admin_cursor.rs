@@ -1,5 +1,5 @@
-use tempfile::TempDir;
 use chrono::Utc;
+use tempfile::TempDir;
 
 use vision_market::market::{cash_store, cursor};
 
@@ -14,7 +14,12 @@ fn pagination_logic_produces_expected_pages() {
         let id = format!("id{i:03}");
         let now = Utc::now().timestamp() - i as i64;
         let mut o = cash_store::new_pending(
-            id.clone(), format!("V1User{i}"), 1000 + i as u64, 100 + i as u64, None, None
+            id.clone(),
+            format!("V1User{i}"),
+            1000 + i as u64,
+            100 + i as u64,
+            None,
+            None,
         );
         o.created_at = now;
         o.updated_at = now;
@@ -23,7 +28,7 @@ fn pagination_logic_produces_expected_pages() {
 
     // Simulate handler's list behavior
     let mut all = cash_store::list_all().unwrap_or_default();
-    all.sort_by(|a,b| b.updated_at.cmp(&a.updated_at).then(b.id.cmp(&a.id)));
+    all.sort_by(|a, b| b.updated_at.cmp(&a.updated_at).then(b.id.cmp(&a.id)));
     let limit = 50usize;
     let page1: Vec<_> = all.iter().take(limit).cloned().collect();
     assert_eq!(page1.len(), 50);

@@ -1,4 +1,4 @@
-use std::process::{Command, Child};
+use std::process::{Child, Command};
 use std::thread::sleep;
 use std::time::Duration;
 
@@ -11,8 +11,8 @@ fn vision_market_smoke() {
             .spawn()
             .expect("failed to spawn vision-market executable")
     } else {
-            Command::new("cargo")
-                .args(["run", "--bin", "vision-market"])
+        Command::new("cargo")
+            .args(["run", "--bin", "vision-market"])
             .spawn()
             .expect("failed to spawn `cargo run --bin vision-market`")
     };
@@ -20,8 +20,13 @@ fn vision_market_smoke() {
     // Give the server a moment to start and bind
     sleep(Duration::from_millis(800));
 
-    let resp = reqwest::blocking::get("http://127.0.0.1:8080/market/land/listings").expect("request failed");
-    assert_eq!(resp.status().as_u16(), 200, "expected 200 from /market/land/listings");
+    let resp = reqwest::blocking::get("http://127.0.0.1:8080/market/land/listings")
+        .expect("request failed");
+    assert_eq!(
+        resp.status().as_u16(),
+        200,
+        "expected 200 from /market/land/listings"
+    );
 
     // Tear down
     let _ = child.kill();

@@ -1,15 +1,18 @@
-use axum::{Router, routing::post, http::StatusCode, Json};
 use axum::http::HeaderMap;
+use axum::{http::StatusCode, routing::post, Json, Router};
 use bytes::Bytes;
 use serde::Deserialize;
 use serde_json::Value;
 use uuid::Uuid;
 
-use crate::market::cash_store;
 use crate::ledger::client;
+use crate::market::cash_store;
 
 #[derive(Deserialize)]
-struct CashBuyRequest { buyer_addr: String, usd_amount: u64 }
+struct CashBuyRequest {
+    buyer_addr: String,
+    usd_amount: u64,
+}
 
 pub fn router() -> Router {
     Router::new()
@@ -29,18 +32,31 @@ async fn buy_intent(Json(req): Json<CashBuyRequest>) -> (StatusCode, Json<Value>
     // Convert USD cents -> CASH units using the oracle helper
     let cash_amount = crate::market::oracle::usd_to_cash(req.usd_amount);
 
-    let order = cash_store::new_pending(order_id.clone(), req.buyer_addr.clone(), req.usd_amount, cash_amount, Some(session_id.clone()), None);
+    let order = cash_store::new_pending(
+        order_id.clone(),
+        req.buyer_addr.clone(),
+        req.usd_amount,
+        cash_amount,
+        Some(session_id.clone()),
+        None,
+    );
     if let Err(e) = cash_store::put(&order) {
         eprintln!("Failed to persist cash order: {:?}", e);
-        return (StatusCode::INTERNAL_SERVER_ERROR, Json(serde_json::json!({ "error": "failed to create order" })));
+        return (
+            StatusCode::INTERNAL_SERVER_ERROR,
+            Json(serde_json::json!({ "error": "failed to create order" })),
+        );
     }
 
-    (StatusCode::OK, Json(serde_json::json!({
-        "session_id": session_id,
-        "session_url": format!("https://checkout.stripe.com/pay/{}", order_id),
-        "order_id": order_id,
-        "stripe_secret_present": !_stripe_secret.is_empty()
-    })))
+    (
+        StatusCode::OK,
+        Json(serde_json::json!({
+            "session_id": session_id,
+            "session_url": format!("https://checkout.stripe.com/pay/{}", order_id),
+            "order_id": order_id,
+            "stripe_secret_present": !_stripe_secret.is_empty()
+        })),
+    )
 }
 
 async fn stripe_webhook(headers: HeaderMap, body: Bytes) -> StatusCode {
@@ -68,8 +84,19 @@ async fn stripe_webhook(headers: HeaderMap, body: Bytes) -> StatusCode {
     };
 
     // Try to find a session id in common places (data.object.id or data.object.payment_intent)
-    let session_id = v.get("data").and_then(|d| d.get("object")).and_then(|o| o.get("id")).and_then(|s| s.as_str()).map(|s| s.to_string())
-        .or_else(|| v.get("data").and_then(|d| d.get("object")).and_then(|o| o.get("payment_intent")).and_then(|s| s.as_str()).map(|s| s.to_string()))
+    let session_id = v
+        .get("data")
+        .and_then(|d| d.get("object"))
+        .and_then(|o| o.get("id"))
+        .and_then(|s| s.as_str())
+        .map(|s| s.to_string())
+        .or_else(|| {
+            v.get("data")
+                .and_then(|d| d.get("object"))
+                .and_then(|o| o.get("payment_intent"))
+                .and_then(|s| s.as_str())
+                .map(|s| s.to_string())
+        })
         .or_else(|| v.get("id").and_then(|s| s.as_str()).map(|s| s.to_string()));
 
     let session_id = match session_id {
@@ -99,7 +126,9 @@ async fn stripe_webhook(headers: HeaderMap, body: Bytes) -> StatusCode {
                 Err(e) => {
                     eprintln!("failed to mint cash: {:?}", e);
                     // mark order failed
-                    if let Ok(o) = cash_store::set_status(order, "failed") { let _ = o; }
+                    if let Ok(o) = cash_store::set_status(order, "failed") {
+                        let _ = o;
+                    }
                     StatusCode::OK
                 }
             }
