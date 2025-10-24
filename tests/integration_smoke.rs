@@ -24,8 +24,18 @@ fn simple_server_smoke() {
             .expect("failed to spawn cargo run simple_server")
     };
 
-    // give the server a moment to bind
-    sleep(Duration::from_millis(500));
+    // wait for the server to bind by attempting TCP connect (robust vs fixed sleep)
+    let addr = "127.0.0.1:8080".parse().unwrap();
+    let start = std::time::Instant::now();
+    let mut bound = false;
+    while start.elapsed() < Duration::from_secs(5) {
+        if std::net::TcpStream::connect_timeout(&addr, Duration::from_millis(200)).is_ok() {
+            bound = true;
+            break;
+        }
+        sleep(Duration::from_millis(100));
+    }
+    assert!(bound, "simple_server did not bind to 127.0.0.1:8080 in time");
 
     let resp = reqwest::blocking::get("http://127.0.0.1:8080/").expect("request failed");
     assert_eq!(
