@@ -6,7 +6,16 @@ use std::time::Duration;
 mod common;
 
 fn spawn_vision_market_with_env(db_path: &str, electrum_mock_url: &str) -> Child {
-    let exe = std::path::Path::new("target/debug/vision-market.exe");
+    // use platform-specific binary name to avoid falling back to `cargo run`
+    // (on Unix the binary has no .exe extension). If the built binary
+    // exists in target/debug we'll spawn it directly; otherwise fall back
+    // to `cargo run` which builds and runs the binary.
+    let exe_path = if cfg!(windows) {
+        "target/debug/vision-market.exe"
+    } else {
+        "target/debug/vision-market"
+    };
+    let exe = std::path::Path::new(exe_path);
     let mut cmd = if exe.exists() {
         Command::new(exe)
     } else {
