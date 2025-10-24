@@ -32,8 +32,10 @@ jobs:
       - name: Tests
         # Enable the crate-local `dev` feature so integration tests can
         # call helpers gated with `#[cfg(any(test, feature = "dev"))]`.
+        # Use --workspace so feature flags apply to workspace members when
+        # integration tests build the library as a dependency.
         # Avoid enabling permissive bech32 behavior (it's a separate feature).
-        run: cargo test --all --features dev --quiet
+        run: cargo test --workspace --features dev --quiet
 
   rust-ci-windows:
     name: Rust (Windows)
@@ -63,5 +65,6 @@ jobs:
       - name: Tests (single-threaded)
         shell: pwsh
         # Run tests with the `dev` feature enabled so integration tests can
-        # access test helpers that are behind feature gates.
-        run: cargo test --all --features dev --quiet -- --test-threads=1
+        # access test helpers that are behind feature gates. Use --workspace
+        # so feature flags propagate to the package under test.
+        run: cargo test --workspace --features dev --quiet -- --test-threads=1
