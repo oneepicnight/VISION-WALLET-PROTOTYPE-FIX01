@@ -42,7 +42,7 @@ npm run dev
 - ✅ **Open source** - Full code transparency
 
 ### Notes on implementation
-The project decodes Bech32/SegWit addresses using the `bech32` crate and follows BIP-0173 / BIP-0350 rules by default. A permissive fallback is available for local debugging (`BECH32_PERMISSIVE=1`) but is not recommended for CI or production.
+The project decodes Bech32/SegWit addresses using the `bech32` crate and follows BIP-0173 / BIP-0350 rules by default. A permissive fallback exists for local debugging but is gated behind compile-time features to avoid accidental use in production: compile with `--features dev` (used for local tests) or `--features bech32-permissive` to enable the permissive fallback.
 ## 🔧 Advanced Commands
 
 ```bash
